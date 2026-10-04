@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, viewport-fit=cover">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#08111f">
+  <title>YF Reponcil — Database Harga Sparepart</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="css/slideshow.css">
+</head>
+<body>
+  <!-- LOGIN GATE: website content is hidden until the single admin account logs in -->
+  <div id="loginGate" class="login-gate" aria-label="Login YF Reponcil">
+    <div class="login-backdrop"></div>
+    <div class="login-card">
+      <div class="login-logo-wrap">
+        <img class="login-logo" src="LOGOYF/LOGOYF.png" alt="YF Reponcil">
+      </div>
+      <div class="login-kicker">PRIVATE ACCESS</div>
+      <h1>Masuk ke YF Reponcil</h1>
+      <p class="login-subtitle">Website ini khusus untuk pemilik YF Reponcil.</p>
+
+      <form id="loginForm" autocomplete="on">
+        <label class="login-field">
+          <span>Username</span>
+          <input id="loginUsername" name="username" type="text" autocomplete="username"
+                 placeholder="Masukkan username" required>
+        </label>
+
+        <label class="login-field">
+          <span>Password</span>
+          <div class="password-wrap">
+            <input id="loginPassword" name="password" type="password"
+                   autocomplete="current-password" placeholder="Masukkan password" required>
+            <button id="togglePassword" type="button" aria-label="Tampilkan password">Lihat</button>
+          </div>
+        </label>
+
+        <div id="loginError" class="login-error" role="alert" aria-live="polite"></div>
+
+        <button class="login-submit" type="submit">
+          <span>MASUK</span>
+          <span class="login-arrow">→</span>
+        </button>
+      </form>
+
+      <div class="login-note">YF Reponcil · Private LCD Database</div>
+    </div>
+  </div>
+
+  <div id="appShell" class="app-shell">
+  <div class="bg-glow glow-one"></div>
+  <div class="bg-glow glow-two"></div>
+
+  <section id="homePage" class="home-page" aria-label="Beranda YF Reponcil">
+    <div class="home-shell">
+      <header class="mobile-home-header">
+        <div class="home-brand">
+          <img src="LOGOYF/LOGOYF.png" alt="YF Reponcil">
+          <div>
+            <strong>YF REPONCIL</strong>
+            <span>Harga Sparepart + Jasa Pasang</span>
+          </div>
+        </div>
+        <button id="homeLogoutBtn" class="home-profile" type="button" aria-label="Keluar">↗</button>
+      </header>
+
+      <section class="hero-product-card">
+        <div class="slideshow-box home-slideshow" data-slideshow aria-label="LCD dan baterai YF Reponcil">
+          <img class="is-active" src="assets/images/lcd/LCD1.png" alt="LCD YF Reponcil 1" data-category="LCD">
+          <img src="assets/images/lcd/LCD2.png" alt="LCD YF Reponcil 2" data-category="LCD">
+          <img src="assets/images/lcd/LCD3.png" alt="LCD YF Reponcil 3" data-category="LCD">
+          <img src="assets/images/baterai/BATERAI1.png" alt="Baterai YF Reponcil 1" data-category="BATERAI">
+          <img src="assets/images/baterai/BATERAI2.png" alt="Baterai YF Reponcil 2" data-category="BATERAI">
+          <img src="assets/images/baterai/BATERAI3.png" alt="Baterai YF Reponcil 3" data-category="BATERAI">
+          <div class="slide-counter" aria-hidden="true">
+            <span class="is-active"></span><span></span><span></span><span></span><span></span><span></span>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <nav class="bottom-nav" aria-label="Navigasi utama">
+      <button class="nav-item active" data-nav-page="home" type="button"><span>⌂</span><b>Beranda</b></button>
+      <button class="nav-item" data-nav-page="lcd" type="button"><span>▯</span><b>LCD</b></button>
+      <button class="nav-item" data-nav-page="battery" type="button"><span>▣</span><b>Baterai</b></button>
+      <button class="nav-item" data-nav-page="settings" type="button"><span>⚙</span><b>Pengaturan</b></button>
+    </nav>
+  </section>
+
+  <section id="lcdPage" class="service-page hidden">
+  <header class="topbar">
+    <div class="topbar-actions">
+      <button class="back-menu-btn" data-back-menu type="button">← Menu utama</button>
+      <span class="status"><i></i> Database LCD</span>
+      <button id="logoutBtn" class="logout-btn" type="button">Keluar</button>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="eyebrow">LCD PRICE DATABASE</div>
+      <h1>Cari harga LCD<br><span>lebih cepat.</span></h1>
+      <p>Masukkan tipe HP untuk melihat harga dan grup kompatibilitas LCD.</p>
+
+      <div class="search-grid">
+        <div class="search-wrap">
+          <span class="search-icon">⌕</span>
+          <input id="searchInput" type="search" placeholder="Cari tipe HP, contoh: Y95 atau A12" autocomplete="off">
+          <button id="clearBtn" class="clear-btn" type="button" aria-label="Hapus pencarian">×</button>
+        </div>
+        <label class="brand-filter">
+          <span>Merek</span>
+          <select id="brandFilter">
+            <option value="">Semua Merek</option>
+          </select>
+        </label>
+      </div>
+    </section>
+
+    <section class="content">
+      <div class="section-head">
+        <div>
+          <span class="section-kicker">HASIL PENCARIAN</span>
+          <h2 id="resultTitle">Pilih tipe HP</h2>
+        </div>
+        <span id="resultCount" class="result-count"></span>
+      </div>
+
+      <div id="results" class="results">
+        <div class="empty-state">
+          <div class="empty-icon">⌕</div>
+          <h3>Mulai dengan mencari tipe HP</h3>
+          <p>Contoh: <b>Y95</b>, <b>A12</b>, <b>A16</b>, atau <b>Y91C</b>.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <span>© <span id="year"></span> YF Reponcil</span>
+    <span>LCD Compatibility & Price Database</span>
+  </footer>
+
+
+  <nav class="bottom-nav" aria-label="Navigasi utama">
+    <button class="nav-item" data-nav-page="home" type="button"><span>⌂</span><b>Beranda</b></button>
+    <button class="nav-item" data-nav-page="lcd" type="button"><span>▯</span><b>LCD</b></button>
+    <button class="nav-item" data-nav-page="battery" type="button"><span>▣</span><b>Baterai</b></button>
+    <button class="nav-item" data-nav-page="settings" type="button"><span>⚙</span><b>Pengaturan</b></button>
+  </nav>
+  </section>
+
+  <section id="batteryPage" class="service-page hidden" aria-label="Database harga baterai">
+    <header class="topbar">
+      <div class="topbar-actions">
+        <button class="back-menu-btn" data-back-menu type="button">← Menu utama</button>
+        <span class="status"><i></i> Database Baterai</span>
+        <button id="batteryLogoutBtn" class="logout-btn" type="button">Keluar</button>
+      </div>
+    </header>
+    <main>
+      <section class="hero">
+        <div class="eyebrow">BATTERY PRICE DATABASE</div>
+        <h1>Cari harga baterai<br><span>lebih mudah.</span></h1>
+        <p>Masukkan tipe HP atau kode baterai untuk mencari data harga baterai.</p>
+        <div class="search-grid battery-search-grid">
+          <div class="search-wrap">
+            <span class="search-icon">⌕</span>
+            <input id="batterySearchInput" type="search" placeholder="Cari tipe HP atau kode baterai" autocomplete="off">
+            <button id="batteryClearBtn" class="clear-btn" type="button" aria-label="Hapus pencarian baterai">×</button>
+          </div>
+          <label class="brand-filter"><span>Merek</span><select id="batteryBrandFilter"><option value="">Semua Merek</option></select></label>
+        </div>
+      </section>
+      <section class="content">
+        <div class="section-head"><div><span class="section-kicker">HASIL PENCARIAN</span><h2 id="batteryResultTitle">Pilih tipe HP</h2></div><span id="batteryResultCount" class="result-count"></span></div>
+        <div id="batteryResults" class="results"><div class="empty-state"><div class="empty-icon">⌕</div><h3>Database baterai siap diisi</h3><p>Tambahkan daftar tipe, kode, dan harga baterai pada file <b>assets/battery-data.js</b>.</p></div></div>
+      </section>
+    </main>
+    <footer><span>© <span class="current-year"></span> YF Reponcil</span><span>Battery Price Database</span></footer>
+
+  <nav class="bottom-nav" aria-label="Navigasi utama">
+    <button class="nav-item" data-nav-page="home" type="button"><span>⌂</span><b>Beranda</b></button>
+    <button class="nav-item" data-nav-page="lcd" type="button"><span>▯</span><b>LCD</b></button>
+    <button class="nav-item" data-nav-page="battery" type="button"><span>▣</span><b>Baterai</b></button>
+    <button class="nav-item" data-nav-page="settings" type="button"><span>⚙</span><b>Pengaturan</b></button>
+  </nav>
+  </section>
+
+
+  <section id="settingsPage" class="service-page hidden settings-page" aria-label="Pengaturan">
+    <header class="topbar settings-topbar">
+      <div class="topbar-actions"></div>
+    </header>
+    <main>
+      <section class="settings-hero">
+        <span class="eyebrow">APP SETTINGS</span>
+        <h1>Pengaturan</h1>
+        <p>Kelola data, harga, dan cadangan database YF Reponcil.</p>
+      </section>
+      <section class="settings-list">
+        <button id="editPriceBtn" class="settings-item" type="button"><span class="settings-item-icon">✎</span><span><strong>Edit Harga</strong><small>Perbarui harga LCD dan baterai</small></span><b>›</b></button>
+        <button id="editTypeBtn" class="settings-item" type="button"><span class="settings-item-icon">⌕</span><span><strong>Edit Tipe HP</strong><small>Kelola model dan kompatibilitas</small></span><b>›</b></button>
+        <button id="addDataBtn" class="settings-item" type="button"><span class="settings-item-icon">＋</span><span><strong>Tambahkan Data</strong><small>Tambah tipe HP dan harga sparepart</small></span><b>›</b></button>
+        <button id="backupBtn" class="settings-item" type="button"><span class="settings-item-icon">↻</span><span><strong>Backup &amp; Restore</strong><small>Simpan dan pulihkan data aplikasi</small></span><b>›</b></button>
+      </section>
+    </main>
+    <nav class="bottom-nav" aria-label="Navigasi utama">
+      <button class="nav-item" data-nav-page="home" type="button"><span>⌂</span><b>Beranda</b></button>
+      <button class="nav-item" data-nav-page="lcd" type="button"><span>▯</span><b>LCD</b></button>
+      <button class="nav-item" data-nav-page="battery" type="button"><span>▣</span><b>Baterai</b></button>
+      <button class="nav-item active" data-nav-page="settings" type="button"><span>⚙</span><b>Pengaturan</b></button>
+    </nav>
+  </section>
+
+
+  <div id="settingsModal" class="settings-modal hidden" role="dialog" aria-modal="true" aria-labelledby="settingsModalTitle">
+    <div class="settings-modal-card">
+      <button id="closeSettingsModal" class="settings-modal-close" type="button">×</button>
+      <span class="eyebrow">YF REPONCIL</span>
+      <h2 id="settingsModalTitle">Pengaturan</h2>
+      <p id="settingsModalText"></p>
+      <div id="settingsModalBody"></div>
+    </div>
+  </div>
+
+  <script src="assets/data.js"></script>
+  <script src="assets/battery-data.js"></script>
+  <script src="app.js"></script>
+  <script src="js/slideshow.js"></script>
+  </div>
+</body>
+</html>

@@ -1,0 +1,10 @@
+{
+  "name": "YF Reponcil",
+  "short_name": "YF Reponcil",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#08111f",
+  "theme_color": "#08111f",
+  "description": "Aplikasi database harga LCD dan baterai YF Reponcil"
+}
